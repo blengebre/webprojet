@@ -75,17 +75,17 @@ function initSmoothScrolling() {
     
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
-            e.preventDefault();
+            // Only handle if href starts with # and is not just '#'
             const targetId = this.getAttribute('href');
+            if (!targetId || !targetId.startsWith('#') || targetId === '#') return;
             const targetSection = document.querySelector(targetId);
-            
-            if (targetSection) {
-                const offsetTop = targetSection.offsetTop - 70; // Account for fixed navbar
-                window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
-                });
-            }
+            if (!targetSection) return;
+            e.preventDefault();
+            const offsetTop = targetSection.offsetTop - 70; // Account for fixed navbar
+            window.scrollTo({
+                top: offsetTop,
+                behavior: 'smooth'
+            });
         });
     });
 }
@@ -115,8 +115,8 @@ function initContactForm() {
             const phone = formData.get('phone');
             const message = formData.get('message');
             
-            // Simple validation
-            if (!name || !email || !message) {
+            // Simple validation (message is optional)
+            if (!name || !email) {
                 showNotification('Please fill in all required fields.', 'error');
                 return;
             }
@@ -250,63 +250,72 @@ function loadMenuItems() {
             description: 'Toasted bread topped with tomatoes, garlic, and fresh basil',
             price: '$8.99',
             category: 'appetizers',
-            icon: 'fas fa-bread-slice'
+            icon: 'fas fa-bread-slice',
+            img: 'https://images.unsplash.com/photo-1502741338009-cac2772e18bc?auto=format&fit=crop&w=400&q=80'
         },
         {
             title: 'Margherita Pizza',
             description: 'Classic pizza with tomato sauce, mozzarella, and fresh basil',
             price: '$16.99',
             category: 'main-courses',
-            icon: 'fas fa-pizza-slice'
+            icon: 'fas fa-pizza-slice',
+            img: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=400&q=80'
         },
         {
             title: 'Spaghetti Carbonara',
             description: 'Pasta with eggs, cheese, pancetta, and black pepper',
             price: '$18.99',
             category: 'main-courses',
-            icon: 'fas fa-utensils'
+            icon: 'fas fa-utensils',
+            img: 'https://images.unsplash.com/photo-1523987355523-c7b5b0723c6a?auto=format&fit=crop&w=400&q=80'
         },
         {
             title: 'Caesar Salad',
             description: 'Fresh romaine lettuce with Caesar dressing and croutons',
             price: '$12.99',
             category: 'appetizers',
-            icon: 'fas fa-leaf'
+            icon: 'fas fa-leaf',
+            img: 'https://images.unsplash.com/photo-1464306076886-debca5e8a6b0?auto=format&fit=crop&w=400&q=80'
         },
         {
             title: 'Tiramisu',
             description: 'Classic Italian dessert with coffee-flavored mascarpone',
             price: '$9.99',
             category: 'desserts',
-            icon: 'fas fa-cake'
+            icon: 'fas fa-cake',
+            img: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80'
         },
         {
             title: 'Chicken Parmesan',
             description: 'Breaded chicken with marinara sauce and melted cheese',
             price: '$22.99',
             category: 'main-courses',
-            icon: 'fas fa-drumstick-bite'
+            icon: 'fas fa-drumstick-bite',
+            img: 'https://images.unsplash.com/photo-1603079841834-0c7e6e6b7a0e?auto=format&fit=crop&w=400&q=80'
         },
         {
             title: 'Garlic Bread',
             description: 'Toasted bread with garlic butter and herbs',
             price: '$6.99',
             category: 'appetizers',
-            icon: 'fas fa-bread-slice'
+            icon: 'fas fa-bread-slice',
+            img: 'https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=400&q=80'
         },
         {
             title: 'Chocolate Gelato',
             description: 'Rich and creamy chocolate Italian ice cream',
             price: '$7.99',
             category: 'desserts',
-            icon: 'fas fa-ice-cream'
+            icon: 'fas fa-ice-cream',
+            img: 'https://images.unsplash.com/photo-1505250469679-203ad9ced0cb?auto=format&fit=crop&w=400&q=80'
         },
         {
             title: 'Lasagna',
             description: 'Layered pasta with meat sauce, cheese, and béchamel',
             price: '$20.99',
             category: 'main-courses',
-            icon: 'fas fa-layer-group'
+            icon: 'fas fa-layer-group',
+            img: 'https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=400&q=80'
         }
     ];
     
@@ -316,6 +325,7 @@ function loadMenuItems() {
         menuItem.setAttribute('data-category', item.category);
         
         menuItem.innerHTML = `
+            <img src="${item.img}" alt="${item.title}" class="menu-item-img" />
             <div class="menu-item-image">
                 <i class="${item.icon}"></i>
             </div>

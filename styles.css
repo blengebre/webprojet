@@ -102,6 +102,25 @@ body {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     padding-top: 70px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80') center center/cover no-repeat;
+    opacity: 0.35;
+    z-index: 0;
+}
+
+.hero-content, .hero-image {
+    position: relative;
+    z-index: 1;
 }
 
 .hero-content {
@@ -150,6 +169,16 @@ body {
     justify-content: center;
     align-items: center;
     animation: fadeInRight 1s ease 0.6s both;
+}
+
+.hero-image img.hero-food-img {
+    width: 320px;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    border: 6px solid #fff;
+    background: #fff;
 }
 
 .image-placeholder {
@@ -230,6 +259,14 @@ body {
     justify-content: center;
     font-size: 3rem;
     color: white;
+}
+
+.menu-item-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 12px 12px 0 0;
+    margin-bottom: 1rem;
 }
 
 .menu-item-content {
@@ -321,9 +358,12 @@ body {
     justify-content: center;
 }
 
-.about-image .image-placeholder {
-    background: linear-gradient(45deg, #d4af37, #b8941f);
-    color: white;
+.about-image img.about-img {
+    width: 100%;
+    max-width: 350px;
+    border-radius: 20px;
+    object-fit: cover;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
 }
 
 /* Contact Section */
@@ -581,5 +621,60 @@ body {
 
     .container {
         padding: 0 15px;
+    }
+}
+
+/* HTML Elements Demo Section */
+.elements-demo-section {
+    padding: 80px 0;
+    background: #fff;
+}
+
+.elements-demo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.element-demo {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+    text-align: center;
+}
+
+.element-demo h3 {
+    margin-bottom: 1rem;
+    color: #764ba2;
+    font-size: 1.1rem;
+}
+
+.element-demo iframe,
+.element-demo video {
+    width: 100%;
+    max-width: 320px;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.element-demo audio {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.responsive-note {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #333;
+    background: #e9ecef;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+@media (max-width: 600px) {
+    .elements-demo-grid {
+        grid-template-columns: 1fr;
     }
 } 
